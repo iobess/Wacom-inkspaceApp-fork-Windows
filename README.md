@@ -27,10 +27,11 @@ Wacom正在停止对此应用的支持，但仍有大量设备依赖Wacom Inkspa
 
 ##### 关于 Paper Edition(Paper Mode)
 Wacom Inkspace App应用可在USB/BT获取到支持paper mode 设备中的笔记数据并下载然后从设备中 **⚠️ 删除** 这些笔记数据。
+###### 手动备份路径: `%AppData%\Wacom Inkspace App`
 
 ##### 稳定性说明
 由于我没有在代码层进行审阅排查，我不确定其可靠性和稳定性。
-如果您遇到未知错误，则意味着此版本不适用于您的工作流程。
+如果您遇到未知错误，则意味着此版本不适用于您的设备系统环境或工作流程。
 
 
 
@@ -39,7 +40,7 @@ Wacom Inkspace App应用可在USB/BT获取到支持paper mode 设备中的笔记
 
 目前依赖大量旧版本技术栈，因此在安装环境过程中避免npm install，而是推荐直接指定版本。
 src有原代码仓库贡献值预编译的Mac相关二进制包依赖，可以尝试在Mac构建。
-我预编译核心模块的Windows包。
+我额外还预编译几个核心模块的Windows二进制文件包含在此仓库中。
 
 
 #### 以下是原仓库作者的README.md
@@ -57,5 +58,5 @@ I've created a new dev script called `devel`, since the original dev task refere
 
 ## See Also
 `readme-original.md`, the original repository's readme.
-windows11的二进制核心模块node文件在其对应的build文件夹内，例如USB："C:\Users\Pytho\Pictures\wacom-inkspace\node_modules\usb\build\Release"
+Windows 11 的二进制核心模块 node 文件在其对应的 build 文件夹内，例如 USB：`node_modules\usb\build\Release`
 
