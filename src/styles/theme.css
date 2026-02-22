@@ -1,0 +1,86 @@
+:root {
+    /* Colors - Default (Light) */
+    --bg-app: #f5f5f5;
+    /* Thumbs background */
+    --bg-main: #ffffff;
+    /* Main content background */
+    --bg-panel: #ffffff;
+    --bg-modal: #ffffff;
+
+    --text-primary: #333333;
+    /* DarkGrey */
+    --text-secondary: #666666;
+    /* MediumGrey */
+    --text-disabled: #999999;
+    /* MediumLightGrey */
+    --text-on-accent: #ffffff;
+
+    --border-color: #dcdcdc;
+    /* VeryLightGrey */
+    --divider-color: #e5e5e5;
+
+    --accent-color: #00a7db;
+    /* InkspaceBlue */
+    --accent-hover: #0089b3;
+
+
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --overlay-color: rgba(255, 255, 255, 0.8);
+
+    --btn-bg: #333333;
+    --btn-text: #ffffff;
+
+}
+
+.theme-dark {
+    /* Colors - Dark */
+    --bg-app: #121212;
+    --bg-main: #1e1e1e;
+    --bg-panel: #252526;
+    --bg-modal: #2d2d2d;
+
+    --text-primary: #e0e0e0;
+    --text-secondary: #aaaaaa;
+    --text-disabled: #666666;
+    --text-on-accent: #ffffff;
+
+    --border-color: #444444;
+    --divider-color: #333333;
+
+    --accent-color: #00a7db;
+    /* Keep brand color or slight adjustment */
+    --accent-hover: #33b8e2;
+
+
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --overlay-color: rgba(0, 0, 0, 0.7);
+
+    color: var(--text-primary);
+
+
+    --btn-bg: #505050;
+    --btn-text: #ffffff;
+
+    background-color: var(--bg-main);
+}
+
+
+
+/* Icon Adaptation for Dark Mode */
+.theme-dark svg path {
+    fill: currentColor !important;
+}
+
+.theme-dark svg[class*="stroke"] path {
+    fill: none !important;
+    stroke: currentColor !important;
+}
+
+
+/* Canvas Adaptation for Dark Mode */
+
+.theme-dark .edit.container,
+
+.theme-dark .live.container {
+    background-color: #000000;
+}
