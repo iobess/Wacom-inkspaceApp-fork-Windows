@@ -1,6 +1,48 @@
-# Wacom Inkspace App 
+# Wacom Inkspace App for Windows
 --2.7.3
-Now buildable!!
+
+
+
+### 基于Wacom InkspaceApp反编译项目构建的Windows Wacom Inkspace App应用
+#### 原始仓库参阅：https://github.com/elliotberry/wacom-inkspace.git
+
+
+### ✨ 改进项：
+
+> [!IMPORTANT]
+> **本 Fork 相较于原仓库的改进：**
+>
+> 1. 🖼️ **增加：全部导出功能**（SVG, PSD, PNG, JPEG）
+> 2. 🌙 **深色模式支持**（可从 `设置 -> 支持选项` 中打开/关闭）
+> 3. 🔌 **现在可随时切换 USB / BT 连接方式**
+
+
+
+#### 目的
+
+Wacom正在停止对此应用的支持，但仍有大量设备依赖Wacom InkspaceApp（例如影拓Pro的Paper Edition功能），感谢原仓库社区的贡献。我的开发依赖AI完成，但仅限于少量的功能和UI层级的解决。对于Windows平台的Wacom用户已经达到理想的可用程度。
+
+
+#### 注意事项
+
+##### 关于 Paper Edition(Paper Mode)
+Wacom Inkspace App应用可在USB/BT获取到支持paper mode 设备中的笔记数据并下载然后从设备中 **⚠️ 删除** 这些笔记数据。
+
+##### 稳定性说明
+由于我没有在代码层进行审阅排查，我不确定其可靠性和稳定性。
+如果您遇到未知错误，则意味着此版本不适用于您的工作流程。
+
+
+
+
+### 开发
+
+目前依赖大量旧版本技术栈，因此在安装环境过程中避免npm install，而是推荐直接指定版本。
+src有原代码仓库贡献值预编译的Mac相关二进制包依赖，可以尝试在Mac构建。
+我预编译核心模块的Windows包。
+
+
+#### 以下是原仓库作者的README.md
 
 Since Wacom's support of this product appears to be waning, it would be nice to keep something alive. Kept node_modules since there's some necessary stuff in there.
 
@@ -17,5 +59,3 @@ I've created a new dev script called `devel`, since the original dev task refere
 `readme-original.md`, the original repository's readme.
 windows11的二进制核心模块node文件在其对应的build文件夹内，例如USB："C:\Users\Pytho\Pictures\wacom-inkspace\node_modules\usb\build\Release"
 
-## 警告！！！
-禁止一切会产生npm install行为的安装/更新等类似操作。一旦npm install，项目将完全覆灭死亡。
