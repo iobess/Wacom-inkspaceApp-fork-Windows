@@ -41,6 +41,7 @@ let DeviceManager = {
 	DOWNLOAD_INTERVAL: 15000,
 
 	init(appID) {
+		this.appID = appID;
 		let device;
 
 		Object.defineProperty(this, "device", {

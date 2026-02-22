@@ -23,75 +23,35 @@ class WacomIDBenefits extends Component {
 					<tbody>
 					<tr>
 						<th><SignUpTick /></th>
-						<td><FormattedMessage id={'plus.storage.title'}/></td>
+						<td><FormattedMessage id={'plus.export.all.title'}/></td>
 					</tr>
 					<tr>
 						<th></th>
-						<td><FormattedMessage id={'plus.storage.description'}/></td>
+						<td><FormattedMessage id={'plus.export.all.description'}/></td>
 					</tr>
 					<tr>
 						<th><SignUpTick /></th>
-						<td><FormattedMessage id={'plus.sync.title'}/></td>
+						<td><FormattedMessage id={'plus.usb.bt.title'}/></td>
 					</tr>
 					<tr>
 						<th></th>
-						<td><FormattedMessage id={'plus.sync.description'}/></td>
+						<td><FormattedMessage id={'plus.usb.bt.description'}/></td>
 					</tr>
 					<tr>
 						<th><SignUpTick /></th>
-						<td><FormattedMessage id={'plus.text.title'}/></td>
+						<td><FormattedMessage id={'plus.darktheme.title'}/></td>
 					</tr>
 					<tr>
 						<th></th>
-						<td><FormattedMessage id={'plus.text.description'}/></td>
+						<td><FormattedMessage id={'plus.darktheme.description'}/></td>
 					</tr>
 					<tr>
 						<th><SignUpTick /></th>
-						<td><FormattedMessage id={'plus.video.title'}/></td>
+						<td><FormattedMessage id={'plus.appid.title'}/></td>
 					</tr>
 					<tr>
 						<th></th>
-						<td><FormattedMessage id={'plus.video.description'}/></td>
-					</tr>
-					<tr>
-						<th><SignUpTick /></th>
-						<td><FormattedMessage id={'plus.export.title'}/></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td><FormattedMessage id={'plus.export.description'}/></td>
-					</tr>
-					<tr>
-						<th><SignUpTick /></th>
-						<td><FormattedMessage id={'plus.tag.title'}/></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td><FormattedMessage id={'plus.tag.description'}/></td>
-					</tr>
-					<tr>
-						<th><SignUpTick /></th>
-						<td><FormattedMessage id={'plus.web.title'}/></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td><FormattedMessage id={'plus.web.description'}/></td>
-					</tr>
-					<tr>
-						<th><SignUpTick /></th>
-						<td><FormattedMessage id={'plus.tags.title'}/></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td><FormattedMessage id={'plus.tags.description'}/></td>
-					</tr>
-					<tr>
-						<th><SignUpTick /></th>
-						<td><FormattedMessage id={'plus.collaboration.title'}/></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td><FormattedMessage id={'plus.collaboration.description'}/></td>
+						<td><FormattedMessage id={'plus.appid.description'}/></td>
 					</tr>
 					</tbody>
 					</table>

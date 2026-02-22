@@ -122,7 +122,7 @@ let settings = {
 			// click: "redirect",
 			classNameSource: "getSetNameClassName",
 			// location: "SelectOrientation"
-			click: function() {
+			click: function () {
 				let form = this.refs["ExtraContent"].getWrappedInstance().getWrappedInstance();
 
 				if (form.state.value) {
@@ -130,7 +130,7 @@ let settings = {
 					this.props.redirect("SelectOrientation");
 				}
 				else
-					form.setState({error: "required"});
+					form.setState({ error: "required" });
 			}
 		}]
 	},
@@ -155,15 +155,9 @@ let settings = {
 		extraContent: WacomIDBenefits,
 
 		buttons: [{
-			text: "btn.cloudLogin.login",
-			click: () => {
-				AuthenticationManager.login(true);
-			}
-		}, {
-			text: "btn.notNow",
-			className: "cancel",
-			click: "openDialog",
-			dialog: Modals.UNLOCK_FEATURES_LATER
+			text: "btn.ok.got.it",
+			click: "redirect",
+			location: "Complete"
 		}]
 	},
 
