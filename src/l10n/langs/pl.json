@@ -122,7 +122,7 @@
   "downloadProceed.description": "Jeśli zamkniesz aplikację Wacom Inkspace w trakcie pobierania, utracisz swoje notatki.",
   "export.limit.reached.title": "Osiągnięto limit",
   "export.limit.reached.description": "Przekroczono maksymalną liczbę 40 notatek. Ogranicz liczbę wybranych notatek i spróbuj ponownie.",
-    "plus.title": "Improvements",
+    "plus.title": "Move your ideas further",
   "plus.export.all.title": "One-click Export All Notes",
   "plus.export.all.description": "Supports SVG, PSD, PNG, JPEG formats",
   "plus.usb.bt.title": "USB & BT Switch",

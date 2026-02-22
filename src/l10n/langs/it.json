@@ -122,7 +122,7 @@
   "downloadProceed.description": "Se chiudi l’app Wacom Inkspace durante il download, le note andranno perse.",
   "export.limit.reached.title": "Limite raggiunto",
   "export.limit.reached.description": "È stata superata la quantità massima di 40 note. Riduci il numero di note selezionate e riprova.",
-    "plus.title": "Improvements",
+    "plus.title": "Move your ideas further",
   "plus.export.all.title": "One-click Export All Notes",
   "plus.export.all.description": "Supports SVG, PSD, PNG, JPEG formats",
   "plus.usb.bt.title": "USB & BT Switch",

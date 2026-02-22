@@ -59,7 +59,7 @@
 
 .structure .content {
 	height: 100%;
-	height: calc(100vh - 16px);
+	height: calc(100vh - 16px - 36px);
 	margin: 16px 9px 0 30px;
 }
 
@@ -116,7 +116,7 @@
 }
 
 .structure .content .groups-container {
-	height: calc(100vh - 16px - 34px - 34px);
+	height: calc(100vh - 16px - 34px - 34px - 36px);
 	overflow-y: auto;
 }
 
@@ -142,6 +142,47 @@
 
 .structure .content .groups-container a.selected .dot {
 	display: block;
+}
+
+/* Note Count Bar */
+.structure .note-count-bar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	padding: 0 15px;
+	font-size: 12px;
+	color: var(--text-secondary);
+	background-color: var(--bg-panel);
+	user-select: none;
+	box-sizing: border-box;
+}
+
+.structure .note-count-bar::before,
+.structure .note-count-bar::after {
+	content: '';
+	flex: 1;
+	height: 1px;
+	background-color: var(--border-color);
+}
+
+.structure .note-count-bar .note-count-text {
+	padding: 0 10px;
+	white-space: nowrap;
+}
+
+
+
+.structure.collapsed .note-count-bar {
+	padding: 0 8px;
+}
+
+.structure.collapsed .note-count-bar .note-count-label,
+.structure.collapsed .note-count-bar .note-count-separator {
+	display: none;
 }
 
 .groups {

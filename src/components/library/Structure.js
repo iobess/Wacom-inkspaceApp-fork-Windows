@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import classnames from 'classnames';
 
 import * as actions from '../../actions/library';
-import {openDialog} from '../../actions/modals';
+import { openDialog } from '../../actions/modals';
 
 import * as Modals from '../../constants/Modals';
 
@@ -37,7 +37,7 @@ class Structure extends Component {
 	}
 
 	createGroup() {
-		this.props.openDialog(Modals.ENTITY, {type: "groups"});
+		this.props.openDialog(Modals.ENTITY, { type: "groups" });
 	}
 
 	openContextMenu(e, name) {
@@ -59,7 +59,7 @@ class Structure extends Component {
 
 	componentDidMount() {
 		if (this.props.context == "LIBRARY" && this.props.filterGroup)
-			this.setState({shouldScroll: true});
+			this.setState({ shouldScroll: true });
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -67,7 +67,7 @@ class Structure extends Component {
 			let node = this.refs[this.props.filterGroup];
 			this.refs["content"].scrollTop = node.offsetTop;
 
-			this.setState({shouldScroll: false});
+			this.setState({ shouldScroll: false });
 		}
 	}
 
@@ -110,7 +110,14 @@ class Structure extends Component {
 				<div ref="content" className="groups-container">
 					{(() => groups.map((group, i) => this.renderGroup(group, i)))()}
 				</div>
-			</div>
+				<div className="note-count-bar">
+					<span className="note-count-text">
+						<span className="note-count-number">{Object.keys(ContentManager.notes || {}).length.toLocaleString()}</span>
+						<span className="note-count-separator"> </span>
+						<span className="note-count-label"><FormattedMessage id="structure.pages" /></span>
+					</span>
+				</div>
+			</div >
 		);
 	}
 
@@ -120,7 +127,7 @@ class Structure extends Component {
 			selected: this.group && this.group.id == group.id
 		});
 
-		return <a key={group.id} ref={group.id} className={groupIconClasses} onClick={this.open.bind(this, "LIBRARY", group)} onDrop={e => this.drop(e, group)} onDragOver={::this.allowDrop} onContextMenu={event => this.openContextMenu(event, group)}><div className="dot"></div>{group.name}</a>
+		return <a key={group.id} ref={group.id} className={groupIconClasses} onClick={this.open.bind(this, "LIBRARY", group)} onDrop={e => this.drop(e, group)} onDragOver={:: this.allowDrop} onContextMenu = { event => this.openContextMenu(event, group) } > <div className="dot"></div>{ group.name }</a >
 	}
 }
 
@@ -129,12 +136,13 @@ function mapStateToProps(state) {
 		context: state.LibraryReducer.context,
 		filterGroup: state.LibraryReducer.filterGroup,
 		groupsModified: state.LibraryReducer.groupsModified,
-		cloudDownloading: state.LibraryReducer.cloudDownloading
+		cloudDownloading: state.LibraryReducer.cloudDownloading,
+		lastModified: state.LibraryReducer.lastModified
 	};
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({...actions, openDialog}, dispatch);
+	return bindActionCreators({ ...actions, openDialog }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Structure);

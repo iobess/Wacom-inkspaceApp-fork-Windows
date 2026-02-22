@@ -122,7 +122,7 @@
   "downloadProceed.description": "如果進行下載時關閉 Wacom Inkspace 應用程式，您的筆記將會遺失。",
   "export.limit.reached.title": "已達限制",
   "export.limit.reached.description": "已達 40 個筆記的數量上限。請減少所選筆記的數量並重試。",
-    "plus.title": "Improvements",
+    "plus.title": "Move your ideas further",
   "plus.export.all.title": "One-click Export All Notes",
   "plus.export.all.description": "Supports SVG, PSD, PNG, JPEG formats",
   "plus.usb.bt.title": "USB & BT Switch",

@@ -122,7 +122,7 @@
   "downloadProceed.description": "다운로드 진행 중에 Wacom Inkspace 앱을 닫으면 메모가 손실됩니다.",
   "export.limit.reached.title": "한도에 도달함",
   "export.limit.reached.description": "최대한도인 40개의 메모를 초과했습니다. 선택한 메모의 수를 줄이고 다시 시도해 주십시오.",
-    "plus.title": "Improvements",
+    "plus.title": "Move your ideas further",
   "plus.export.all.title": "One-click Export All Notes",
   "plus.export.all.description": "Supports SVG, PSD, PNG, JPEG formats",
   "plus.usb.bt.title": "USB & BT Switch",
