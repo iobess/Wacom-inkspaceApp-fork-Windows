@@ -1,11 +1,11 @@
-const {remote, ipcRenderer} = require("electron");
+const { remote, ipcRenderer } = require("electron");
 
-const {Note, Layer, Entity} = require("./Note");
+const { Note, Layer, Entity } = require("./Note");
 
 const DBBridge = require("./DBBridge");
 const ThreadBridge = require("./ThreadBridge");
 
-const {render : consoleBridge} = require("./ConsoleBridge");
+const { render: consoleBridge } = require("./ConsoleBridge");
 
 const project = require("../project.config.js");
 
@@ -21,7 +21,7 @@ class DBBridgeRender extends DBBridge {
 		consoleBridge.init(remote.app.getPath("userData"), project.loggerType);
 
 		this.glWorker = new ThreadBridge(remote.getGlobal("ROOT") + "/scripts/workers/GLWorker.js");
-		this.glWorker.init({root: this.root}, consoleBridge);
+		this.glWorker.init({ root: this.root }, consoleBridge);
 
 		// process.on("disconnect", () => this.glWorker.kill());
 	}
@@ -99,8 +99,14 @@ class DBBridgeRender extends DBBridge {
 
 		return new Promise((resolve, reject) => {
 			this.getNote(id).then(noteData => {
-				this.glWorker.send("EXPORT_NOTE", {input: {note: noteData, format: format}}, resolve, reject);
+				this.glWorker.send("EXPORT_NOTE", { input: { note: noteData, format: format } }, resolve, reject);
 			}).catch(console.error);
+		});
+	}
+
+	exportNotes(notes, options) {
+		return new Promise((resolve, reject) => {
+			this.glWorker.send("EXPORT_NOTES", { input: { notes: notes, options: options || {} } }, resolve, reject);
 		});
 	}
 
@@ -108,7 +114,7 @@ class DBBridgeRender extends DBBridge {
 		// if (debug) console.log("[DB] exportLayerPreview", Object.assign(note, {layers: note.layers.length}));
 
 		return (new Promise((resolve, reject) => {
-			this.glWorker.send("EXPORT_LAYER_PREVIEW", {input: {note: note.toJSON()}}, resolve, reject);
+			this.glWorker.send("EXPORT_LAYER_PREVIEW", { input: { note: note.toJSON() } }, resolve, reject);
 		})).then(data => Buffer.from(data).toString("base64"));
 	}
 
@@ -118,7 +124,7 @@ class DBBridgeRender extends DBBridge {
 
 	recieve(message) {
 		let linker = this.linker[message.id];
-// console.info("[DB] recieve", message.action + " // " + message.id)
+		// console.info("[DB] recieve", message.action + " // " + message.id)
 		if (!linker)
 			console.warn("Linker missing for message: " + JSON.stringify(message));
 		else {
@@ -126,7 +132,7 @@ class DBBridgeRender extends DBBridge {
 				linker.reject(message.error);
 			else
 				linker.resolve(...message.output);
-				// linker.resolve.apply({}, message.output);
+			// linker.resolve.apply({}, message.output);
 
 			delete this.linker[message.id];
 		}

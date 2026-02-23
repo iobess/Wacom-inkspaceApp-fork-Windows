@@ -50,4 +50,4 @@
 .dialog .wacom-id-benefits .features {overflow-y: auto; max-height: calc(100vh - 360px);}
 .dialog .wacom-id-benefits table {margin: 0 auto;}
 
-.video-progress-bar {height: 150px; padding: 50px 60px 0 60px;}
+.video-progress-bar {padding: 30px 60px 15px 60px;}

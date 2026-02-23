@@ -508,10 +508,26 @@ function exportAllNotes(format, forceExportAll = false) {
 			let tempDir = path.join(os.tmpdir(), "WacomExport_" + Date.now());
 			if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir);
 
-			let promises = notesToExport.map(note => {
-				return new Promise((resolve, reject) => {
+			const processSequential = () => {
+				let processedCount = 0;
+
+				const processNext = () => {
+					if (processedCount >= notesToExport.length) {
+						return Promise.resolve();
+					}
+
+					let note = notesToExport[processedCount];
+					let currentState = getState().AppReducer;
+					if (currentState.modal !== Modals.EXPORTING_NOTE) {
+						// User closed the modal, canceling export.
+						return Promise.reject(new Error("CANCELLED"));
+					}
+
+					let progressText = `Processing ${processedCount + 1} of ${notesToExport.length}...`;
+					// Updates UI 
+					dispatch(openDialog(Modals.EXPORTING_NOTE, { title: "exportingNote.title", progressText }));
+
 					let date = new Date(note.creationDate);
-					// Format YYYYMMDD
 					let yyyy = date.getFullYear().toString();
 					let mm = (date.getMonth() + 1).toString().padStart(2, '0');
 					let dd = date.getDate().toString().padStart(2, '0');
@@ -520,25 +536,24 @@ function exportAllNotes(format, forceExportAll = false) {
 					let folderPath = path.join(tempDir, dateFolder);
 					if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath);
 
-					// Filename: YYYYMMDD_Random.EXT
-					// Random number? 
 					let random = Math.floor(Math.random() * 100000).toString();
 					let fileName = `${dateFolder}_${random}.${format.toLowerCase()}`;
 					let filePath = path.join(folderPath, fileName);
 
-					// Call DBManager export
-					// Note: DBManager.exportNote returns a Promise that resolves with buffer (or input)
-					DBManager.exportNote(note.id, format).then((input) => {
+					// Enforcing sequential Promise loop to prevent WebWorker/WebGL canvas locking up 
+					// and avoiding async/await Babel regeneratorRuntime issues.
+					return DBManager.exportNote(note.id, format).then(input => {
 						let buffer = Buffer.from(input);
-						fs.writeFile(filePath, buffer, (err) => {
-							if (err) reject(err);
-							else resolve();
-						});
-					}).catch(err => reject(err));
-				});
-			});
+						fs.writeFileSync(filePath, buffer);
+						processedCount++;
+						return processNext();
+					});
+				};
 
-			Promise.all(promises).then(() => {
+				return processNext();
+			};
+
+			processSequential().then(() => {
 				// All files written. Now Zip.
 				const psCommand = `Compress-Archive -Path "${tempDir}\\*" -DestinationPath "${zipFilePath}" -Force`;
 
@@ -581,9 +596,28 @@ function exportAllNotes(format, forceExportAll = false) {
 				});
 
 			}).catch(err => {
-				console.error("Export error", err);
+				const deleteFolderRecursive = function (path) {
+					if (fs.existsSync(path)) {
+						fs.readdirSync(path).forEach(function (file, index) {
+							var curPath = path + "/" + file;
+							if (fs.lstatSync(curPath).isDirectory()) { // recurse
+								deleteFolderRecursive(curPath);
+							} else { // delete file
+								fs.unlinkSync(curPath);
+							}
+						});
+						fs.rmdirSync(path);
+					}
+				};
+				deleteFolderRecursive(tempDir);
+
 				dispatch(closeDialog());
-				dispatch(addNotification("notification.note.exported.not.succesfully"));
+
+				if (err && err.message === "CANCELLED") {
+					// Silent cancel
+				} else {
+					dispatch(addNotification("notification.note.exported.not.succesfully"));
+				}
 			});
 		});
 	}

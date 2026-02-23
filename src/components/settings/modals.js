@@ -302,7 +302,13 @@ let settings = {
 	ExportingNote: {
 		title: "exportingNote.title",
 		image: images.genaratingDoc,
-		extraContent: VideoProgressBar
+		className: "center",
+		actionBar: "center",
+		extraContent: VideoProgressBar,
+		discardOverlayClcik: true,
+		buttons: [{
+			type: "CANCEL"
+		}]
 	},
 
 	SetName: {

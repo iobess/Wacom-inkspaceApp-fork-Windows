@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {Line} from 'rc-progress';
+import { Line } from 'rc-progress';
 
 class VideoProgressBar extends Component {
 	constructor(props) {
@@ -14,9 +14,9 @@ class VideoProgressBar extends Component {
 	componentDidMount() {
 		let update = () => {
 			if (this.state.percent > 100)
-				this.setState({percent: 0});
+				this.setState({ percent: 0 });
 			else
-				this.setState({percent: this.state.percent+1});
+				this.setState({ percent: this.state.percent + 1 });
 
 			this.timeoutID = setTimeout(update, 100);
 		};
@@ -29,10 +29,13 @@ class VideoProgressBar extends Component {
 	}
 
 	render() {
-		if (!this.props.config.settings.video) return null;
-
 		return (
 			<div className="video-progress-bar">
+				{this.props.config.settings.progressText && (
+					<div style={{ textAlign: "center", marginBottom: "15px", fontWeight: "bold", fontSize: "14px" }}>
+						{this.props.config.settings.progressText}
+					</div>
+				)}
 				<Line percent={this.state.percent} strokeWidth="2" strokeColor="#00AEEF" />
 			</div>
 		)

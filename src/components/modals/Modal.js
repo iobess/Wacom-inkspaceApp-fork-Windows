@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {FormattedMessage} from 'react-intl';
-import {withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import * as actions from '../../actions/modals';
 
 import Button from '../generic/Button';
@@ -69,7 +69,7 @@ class Modal extends Component {
 				if (button.type == "CONFIRM")
 					this.config.confirm = button.click;
 
-				if (button.classNameSource && typeof button.classNameSource != "function") button.classNameSource = ::this.props[button.classNameSource];
+				if (button.classNameSource && typeof button.classNameSource != "function") button.classNameSource = :: this.props[button.classNameSource];
 			}
 		});
 
@@ -78,7 +78,7 @@ class Modal extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.modal != this.props.modal) {
+		if (prevProps.modal !== this.props.modal || prevProps.modalSettings !== this.props.modalSettings) {
 			if (this.props.modal) {
 				if (settings[this.props.modal].custom)
 					delete this.config;
@@ -96,7 +96,7 @@ class Modal extends Component {
 		if (!this.config) return null;
 
 		let wrapperClasses = ("dialog-wrapper flex-wrapper " + this.config.type + " " + (this.config.className || "")).trim();
-		let wrapperClick = this.config.discardOverlayClcik?null:this.config.closeDialog;
+		let wrapperClick = this.config.discardOverlayClcik ? null : this.config.closeDialog;
 
 		let modalClasses = {
 			modal: this.config.image || this.config.extraContentType == "IMAGE",
@@ -123,9 +123,9 @@ class Modal extends Component {
 						}
 					})()}
 					<div className="dialog-content">
-						{image?<div className="flex-wrapper">{image}</div>:null}
-						{this.config.title?<h1><FormattedMessage id={this.config.title} /></h1>:""}
-						{this.config.content?<p><FormattedMessage id={this.config.content} /></p>:""}
+						{image ? <div className="flex-wrapper">{image}</div> : null}
+						{this.config.title ? <h1><FormattedMessage id={this.config.title} /></h1> : ""}
+						{this.config.content ? <p><FormattedMessage id={this.config.content} /></p> : ""}
 						{this.renderExtraContent()}
 
 						{(() => {
