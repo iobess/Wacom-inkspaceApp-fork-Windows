@@ -21,7 +21,7 @@
 
 
 
-#### 目的
+### 目的
 
 Wacom正在停止对此应用的支持，但仍有大量设备依赖Wacom InkspaceApp（例如影拓Pro的Paper Edition功能），感谢原仓库社区的贡献。我的开发依赖AI完成，但仅限于少量的功能和UI层级的解决。对于Windows平台的Wacom用户已经达到理想的可用程度。
 
