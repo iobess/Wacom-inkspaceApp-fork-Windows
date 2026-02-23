@@ -30,8 +30,8 @@ Wacom正在停止对此应用的支持，但仍有大量设备依赖Wacom Inkspa
 
 ##### 关于 Paper Edition(Paper Mode)
 Wacom Inkspace App应用可在USB/BT获取到支持paper mode 设备中的笔记数据并下载然后从设备中 **⚠️ 删除** 这些笔记数据。
-**WacomID登录不可用。**
 ###### 手动备份路径: `%AppData%\Wacom Inkspace App`
+**WacomID登录不可用。**
 
 ##### 稳定性说明
 由于我没有在代码层进行审阅排查，我不确定其可靠性和稳定性。
