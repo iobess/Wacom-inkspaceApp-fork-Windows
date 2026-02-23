@@ -221,7 +221,7 @@ function createWindow() {
 
 	mainWindow.webContents.on("did-finish-load", () => {
 		if (process.platform === 'win32') {
-			mainWindow.setMenuBarVisibility(false);
+			Menu.setApplicationMenu(new Menu());
 		}
 		mainWindow.show()
 		mainWindow.focus()

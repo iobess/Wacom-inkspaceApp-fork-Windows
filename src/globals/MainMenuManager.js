@@ -39,6 +39,12 @@ class MainMenuManager extends MenuManager {
 
 		Menu.setApplicationMenu(menu);
 		NativeLinker.send("auto-updater-update-menu");
+
+		// Hide menu bar on Windows: keep application menu for accelerators,
+		// but remove window-level menu bar so Alt key won't trigger it
+		if (process.platform === 'win32') {
+			require('electron').remote.getCurrentWindow().setMenu(null);
+		}
 	}
 
 	hideMenu() {
