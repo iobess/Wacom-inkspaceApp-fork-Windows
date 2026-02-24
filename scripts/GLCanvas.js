@@ -18,7 +18,7 @@ class GLCanvas {
 
 		this.color = Module.Color.BLACK;
 
-		this.canvas = new Module.InkCanvas(this, this.surfaceSize.width, this.surfaceSize.height, {preserveDrawingBuffer: true});
+		this.canvas = new Module.InkCanvas(this, this.surfaceSize.width, this.surfaceSize.height, { preserveDrawingBuffer: true });
 		this.strokesLayer = this.canvas.createLayer(this.deviceModel.size);
 		this.exportLayer = this.canvas.createLayer(this.surfaceSize);
 
@@ -29,7 +29,7 @@ class GLCanvas {
 		let deviceTransform = this.deviceModel.getSurfaceTransform(scaleFactor);
 
 		let max = Math.max(deviceSize.width, deviceSize.height);
-		let squareSize = {width: max, height: max};
+		let squareSize = { width: max, height: max };
 
 		let t = Math.abs(deviceSize.width - deviceSize.height) / 2;
 		let tx = (deviceSize.width < deviceSize.height) ? t : 0;
@@ -57,24 +57,24 @@ class GLCanvas {
 
 		return this.context;
 	}
-/*
-	resize() {
-		if (this.context.resize)
-			this.context.resize(this.surfaceSize.width, this.surfaceSize.height);
-		else {
-			let ext = this.context.getExtension("stackgl_resize_drawingbuffer");
-			ext.resize(this.surfaceSize.width, this.surfaceSize.height)
+	/*
+		resize() {
+			if (this.context.resize)
+				this.context.resize(this.surfaceSize.width, this.surfaceSize.height);
+			else {
+				let ext = this.context.getExtension("stackgl_resize_drawingbuffer");
+				ext.resize(this.surfaceSize.width, this.surfaceSize.height)
+			}
+	
+			this.canvas.resize(this.surfaceSize.width, this.surfaceSize.height);
+			this.strokesLayer.resize(this.deviceModel.size.width, this.deviceModel.size.height);
+			this.exportLayer.resize(this.surfaceSize.width, this.surfaceSize.height);
+	
+			let thumbSize = this.deviceModel.getSurfaceSize(0.5);
+			this.thumbLayer.resize(thumbSize.width, thumbSize.height);
+			this.thumbTransform = this.deviceModel.getSurfaceTransform(0.5);
 		}
-
-		this.canvas.resize(this.surfaceSize.width, this.surfaceSize.height);
-		this.strokesLayer.resize(this.deviceModel.size.width, this.deviceModel.size.height);
-		this.exportLayer.resize(this.surfaceSize.width, this.surfaceSize.height);
-
-		let thumbSize = this.deviceModel.getSurfaceSize(0.5);
-		this.thumbLayer.resize(thumbSize.width, thumbSize.height);
-		this.thumbTransform = this.deviceModel.getSurfaceTransform(0.5);
-	}
-*/
+	*/
 	destroy() {
 		this.strokeRenderer.delete();
 
@@ -104,7 +104,7 @@ class GLCanvas {
 				this.tool = DrawingToolsBox.getPen(deviceType, rawPath.penType);
 				this.tool.activatePathBuilder(DrawingTool.PathBuilderType.PRESSURE);
 
-				for (let i = 0; i < rawPath.points.length-1; i += rawPath.stride) {
+				for (let i = 0; i < rawPath.points.length - 1; i += rawPath.stride) {
 					switch (i) {
 						case 0:
 							this.inputPhase = Module.InputPhase.Begin;
@@ -117,7 +117,7 @@ class GLCanvas {
 							break;
 					}
 
-					let point = {x: rawPath.points[i], y: rawPath.points[i+1], pressure: rawPath.points[i+2]};
+					let point = { x: rawPath.points[i], y: rawPath.points[i + 1], pressure: rawPath.points[i + 2] };
 					path = this.buildPath(point);
 				}
 
@@ -158,22 +158,22 @@ class GLCanvas {
 
 		if (this.format == "PNG") {
 			this.exportLayer.clear();
-			this.exportLayer.blend(this.strokesLayer, {transform: this.deviceModel.transform});
+			this.exportLayer.blend(this.strokesLayer, { transform: this.deviceModel.transform });
 		}
-		else if (this.format == "JPEG") {
+		else if (this.format === "JPEG" || this.format === "JPG") {
 			this.exportLayer.clear(Module.Color.WHITE);
-			this.exportLayer.blend(this.strokesLayer, {transform: this.deviceModel.transform});
+			this.exportLayer.blend(this.strokesLayer, { transform: this.deviceModel.transform });
 		}
 		else if (this.format == "LAYER") {
 			this.thumbLayer.clear();
-			this.thumbLayer.blend(this.strokesLayer, {rect: this.thumbLayer.bounds});
+			this.thumbLayer.blend(this.strokesLayer, { rect: this.thumbLayer.bounds });
 		}
 		else {
 			this.exportLayer.clear();
-			this.exportLayer.blend(this.strokesLayer, {transform: this.deviceModel.transform});
+			this.exportLayer.blend(this.strokesLayer, { transform: this.deviceModel.transform });
 
 			this.thumbLayer.clear();
-			this.thumbLayer.blend(this.strokesLayer, {transform: this.thumbTransform});
+			this.thumbLayer.blend(this.strokesLayer, { transform: this.thumbTransform });
 		}
 	}
 
@@ -182,7 +182,7 @@ class GLCanvas {
 		let pixels;
 
 		if (name == "thumb") {
-			size = {width: this.thumbLayer.bounds.width, height: this.thumbLayer.bounds.height};
+			size = { width: this.thumbLayer.bounds.width, height: this.thumbLayer.bounds.height };
 			pixels = this.thumbLayer.readPixels();
 		}
 		// export, preview
@@ -201,16 +201,16 @@ class GLCanvas {
 	// postDivideAlpha
 	unPremultiplyAlpha(pixels) {
 		for (let i = 0; i < pixels.length; i += 4) {
-			let alpha = pixels[i+3];
+			let alpha = pixels[i + 3];
 
 			pixels[i] = parseInt((pixels[i] * 255) / alpha);
-			pixels[i+1] = parseInt((pixels[i+1] * 255) / alpha);
-			pixels[i+2] = parseInt((pixels[i+2] * 255) / alpha);
+			pixels[i + 1] = parseInt((pixels[i + 1] * 255) / alpha);
+			pixels[i + 2] = parseInt((pixels[i + 2] * 255) / alpha);
 		}
 	}
 
 	toJPEG() {
-		let rawImageData = {width: this.surfaceSize.width, height: this.surfaceSize.height, data: Buffer.from(this.exportLayer.readPixels())};
+		let rawImageData = { width: this.surfaceSize.width, height: this.surfaceSize.height, data: Buffer.from(this.exportLayer.readPixels()) };
 		let image = jpeg.encode(rawImageData, 100);
 		return image.data;
 	}
@@ -281,14 +281,14 @@ class GLCanvas {
 			canvas.layer.clear();
 			canvas.layer.blend(psdLayer);
 
-// let fs = require("fs");
-// let image = new PNG(surfaceSize);
-// image.data = Buffer.from(canvas.layer.readPixels());
+			// let fs = require("fs");
+			// let image = new PNG(surfaceSize);
+			// image.data = Buffer.from(canvas.layer.readPixels());
 
-// image.pack().pipe(fs.createWriteStream("/Users/vassilev/Documents/Apps/WILL/ViperTestTool/db/psd" + this.deviceModel.orientation + ".png"));
+			// image.pack().pipe(fs.createWriteStream("/Users/vassilev/Documents/Apps/WILL/ViperTestTool/db/psd" + this.deviceModel.orientation + ".png"));
 
-// let buffer = PNG.sync.write(image);
-// fs.writeFileSync("/Users/vassilev/Documents/Apps/WILL/ViperTestTool/db/psd" + this.deviceModel.orientation + ".png", buffer);
+			// let buffer = PNG.sync.write(image);
+			// fs.writeFileSync("/Users/vassilev/Documents/Apps/WILL/ViperTestTool/db/psd" + this.deviceModel.orientation + ".png", buffer);
 
 			data.children.push(layerPSD);
 		});
@@ -339,7 +339,7 @@ class GLCanvas {
 			result = canvas.toPNG("export");
 		else if (options.format == "LAYER")
 			result = canvas.toPNG("thumb");
-		else if (options.format == "JPEG")
+		else if (options.format === "JPEG" || options.format === "JPG")
 			result = canvas.toJPEG();
 		else {
 			result.preview = canvas.toPNG("preview");
